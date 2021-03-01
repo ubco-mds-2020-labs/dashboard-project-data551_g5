@@ -23,7 +23,7 @@ From the EDA Jane realized there was one more pattern, ie. there is a larger num
 
 #### DESCRIPTION OF YOUR APP AND SKETCH
 
-![SampleDash](./dash_551.png)
+![SampleDash](./DASHBOARD_MOCKUP.png)
 
 The dashboard is split into 5 parts the first part having the world map highlighted with the countries we have in our dataset. Below the map, we have 4 graphs each highlighting different issues that have changed over the years. The values in these graphs will be first displayed for all the countries present in our study. The map is made interactive to choose a country or a set of countries and all the four graphs below will have their values updated by your selection. Furthermore, we have a side panel where we have the option of zooming in your graphs with the help of the slider if you want to view your data for a particular range of years. The side panel also has radio points for selecting several categorical variables like sex and generation, which when selected will update the graphs required and give us the variations for that chosen sex or generation.
 
