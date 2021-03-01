@@ -7,7 +7,7 @@ Contributors: Aditya Saluja, Yatin Behl, Sowmya Chenthi Kumar, Poojitha Gowthama
 
 ## Descriptions:
 
-Please find the copy of the proposal [here](https://github.com/ubco-mds-2020-labs/dashboard-project-data551_g5/blob/main/PROPOSAL.md).
+As the project is still in its infancy, please find the proposal [here](https://github.com/ubco-mds-2020-labs/dashboard-project-data551_g5/blob/main/PROPOSAL.md).
 
 ## How to contribute:
 
