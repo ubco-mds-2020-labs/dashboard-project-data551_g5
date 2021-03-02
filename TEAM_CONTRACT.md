@@ -4,9 +4,8 @@ To ensure we focus on what is best for the project, the team will adhere to the 
 
 a.	**Commitment**
 
-1.	Team members are expected to work for [] per week
+1.	Team members are expected to work for 10-12 hours per week
 2.	Be honest and realistic about scheduling and the scope of the project
-3.	Operate proactively, anticipating potential roadblocks including but not limited to [] and working to prevent them from ensuring the project is completed by the specified deadline.  
 
 b.	**Problem Solving**
 
@@ -30,8 +29,8 @@ Given the diversity and expertise of the team, conflicts are bound to happen. It
 
 e.	**Meeting Guidelines and Procedures**
  
-1.	Meetings will be held on [] at []
-2.	Agendas will be issued every [] in advance by []
+1.	Meetings will be held on Sundays at 5 PM
+2.	Agendas will be issued an hour before the scheduled meetings
 3.	All team members are expected to arrive on time and be prepared with all necessary materials.
 4.	If conflicts with the meeting time were to occur, alternatives would be made.
 5.	If additional meetings must be made, they will be added as necessary.
