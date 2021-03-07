@@ -7,15 +7,15 @@ def create_world_plot(data, location, color, hover_name):
                             locations=location,
                             color=color,
                             hover_name=hover_name,
-                            color_continuous_scale=px.colors.sequential.Plasma,
-                            width=300, height=400)
+                            color_continuous_scale=px.colors.sequential.Blues,
+                            width=200, height=262)
 
     fig_map.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
         width=700,
-        # paper_bgcolor="Black"
-        geo=dict(bgcolor='rgba(0,0,0,0)'),
-        # paper_bgcolor='#282b30'
+        #paper_bgcolor="Black",
+        geo=dict(bgcolor='rgba(50,50,50,50)'),
+        paper_bgcolor='#282b30'
     )
 
     return fig_map
@@ -39,6 +39,6 @@ def plot_suicide_gdp(data, sex, year, country, age, generation):
     df = df[df['generation'] == generation]
 
     chart = alt.Chart(df).mark_point().encode(
-        x='gdp_per_capita ($)',
-        y='suicides_no').interactive()
+        alt.X('gdp_per_capita ($)', title='GDP per Capita ($)'),
+        alt.Y('suicides_no', title='Total Number of Suicides')).interactive()
     return chart.to_html()
