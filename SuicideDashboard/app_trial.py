@@ -30,13 +30,21 @@ data_suicides_by_gender = data_mugging.suicides_by_gender(suicide_dataset)
 
 # Create a list that is required for the slider:
 suicide_dataset['year']= pd.to_datetime(suicide_dataset.year, format='%Y')
+suicide_dataset['year'] = suicide_dataset['year'].dt.year 
 date_list = suicide_dataset['year'].unique().tolist()
 date_label = [str(i) for i in date_list]
 zipobj = zip(date_label,date_label)
 dic_date = dict(zipobj)
-dict_date_hard_code = {i : '{}'.format(i) for i in range(1987,2016)}
+#dict_date_hard_code = {i : '{}'.format(i) for i in range(1987,2016, 3)}
 
-app = dash.Dash(external_stylesheets=[dbc.themes.SUPERHERO])
+# Create an array for year:
+year_value = [1985, 2016]
+year_value = pd.to_datetime(pd.Series(year_value), format='%Y')
+year_value = year_value.dt.year
+
+app = dash.Dash(external_stylesheets=[dbc.themes.SLATE])
+
+
 
 app.layout = dbc.Container([
     html.H1('SUICIDE DASHBOARD',
@@ -117,9 +125,8 @@ app.layout = dbc.Container([
                                     value = [min(date_list), max(date_list)],
                                     marks = dic_date, 
                                     included = False
-                    
-                                )
-                                )
+                                )),
+                                html.Div(id = 'text-space')
                                 ])
                                 ]))], width=12)
             ]),
@@ -159,13 +166,13 @@ def update_output(chosencountry):
 @app.callback(
     Output('scatter', 'srcDoc'),
     Input('gender-dropdown', 'value'),
-    Input('year-dropdown', 'value'),
+    #Input('year-dropdown', 'value'),
     Input('country-dropdown', 'value'),
     Input('age-dropdown', 'value'),
     Input('generation-dropdown', 'value')
 )
-def update_output2(gender, year, country, age, generation):
-    return dash_plots.plot_suicide_gdp(data=suicide_dataset, sex=gender, year=year, country=country, age=age, generation=generation)
+def update_output2(gender, country, age, generation):
+    return dash_plots.plot_suicide_gdp(data=suicide_dataset, sex=gender, country=country, age=age, generation=generation)
 
 # Removing this graph
 #@app.callback(
@@ -184,9 +191,24 @@ def update_output2(gender, year, country, age, generation):
 @app.callback(
     Output('mark_point', 'srcDoc'),
     Input('country-dropdown','value')
+    #Input('range-slider', 'value')
 )
 def update_output4(chosencountry):
-    return dash_plots.age_plot(country_dropdown=chosencountry ,source = data_clean_suicide_per_capita)
+    return dash_plots.age_plot(country_dropdown=chosencountry, source = data_clean_suicide_per_capita)
+
+# Create a call back for the slider:
+@app.callback(
+    Output('text-space','children'),
+    Input('range-slider','value')
+)
+def update_output5(input_value):
+    year_input = pd.to_datetime(pd.Series(input_value), format='%Y')
+    year_input = year_input.dt.year
+    return year_input
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+
+

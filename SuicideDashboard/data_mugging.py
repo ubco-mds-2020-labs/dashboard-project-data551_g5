@@ -32,7 +32,7 @@ def clean_data(file_path):
 # Suicides_per capita plot:
 def suicides_per_capita(suicide_data):
     # Rename the dataframe:
-    suicide_subset = suicide_data.query('year >= 1996')
+    suicide_subset = suicide_data
     suicide_subset['year'] = pd.to_datetime(suicide_subset['year'], format= "%Y")
     #suicide2 = suicide_subset.drop(‘country-year’, axis = 1)
     suicide_data = suicide_subset.copy()

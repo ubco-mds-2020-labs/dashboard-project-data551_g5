@@ -2,6 +2,8 @@ import plotly.express as px
 import altair as alt
 from altair import datum
 from vega_datasets import data
+import pylab as plt
+import pandas as pd
 
 # The required world map code:
 def create_world_plot(data, location, color, hover_name):
@@ -9,7 +11,7 @@ def create_world_plot(data, location, color, hover_name):
                             locations=location,
                             color=color,
                             hover_name=hover_name,
-                            color_continuous_scale=px.colors.sequential.Blues,
+                            color_continuous_scale=px.colors.sequential.Viridis,
                             width=200, height=262)
 
     fig_map.update_layout(
@@ -17,42 +19,46 @@ def create_world_plot(data, location, color, hover_name):
         width=700,
         #paper_bgcolor="Black",
         geo=dict(bgcolor='rgba(50,50,50,50)'),
-        paper_bgcolor='#282b30'
+        paper_bgcolor='White',
+        legend = dict( font = dict(size =12, color = 'black'))
     )
+
+    legend = plt.legend()
+    plt.setp(legend.get_texts(), color = 'w')
 
     return fig_map
 
 # The box plot that shows the variations across generations:
 def plot_suicide_boxplot(country_dropdown, data):
-    data_country_filter = data[data['country'] == country_dropdown]
-    alt.themes.enable('dark')
-    chart = alt.Chart(data_country_filter).mark_boxplot().encode(
-        alt.X('suicides/100k pop', title='Suicides per 100k'),
-        alt.Y('generation', title = None),
-        fill = alt.Color('generation', legend=None, scale= alt.Scale(scheme= 'viridis'))
-    ).facet('sex').properties(columns=1).interactive().configure_axis(labelFontSize=10)
-    return chart.to_html()
+        data_country_filter = data[data['country'] == country_dropdown]
+        alt.themes.enable('dark')
+        chart = alt.Chart(data_country_filter).mark_boxplot().encode(
+            alt.X('suicides/100k pop', title='Suicides per 100k'),
+            alt.Y('generation', title = None),
+            fill = alt.Color('generation', legend=None, scale= alt.Scale(scheme= 'viridis'))
+            ).facet('sex').properties(columns=1).interactive().configure_axis(labelFontSize=10)
+        return chart.to_html()
 
 # Aditya's plot:
-def plot_suicide_gdp(data, sex, year, country, age, generation):
-    df = data[data['country'] == country]
-    for gender in sex:
-        df = df[df['sex'] == gender]
-    df = df[df['year'] == year]
-    df = df[df['age'] == age]
-    df = df[df['generation'] == generation]
+def plot_suicide_gdp(data, sex, country, age, generation):
+    data = data[data['country'] == country]
+    #for gender in sex:
+    #    df = df[df['sex'] == gender]
+    #df = df[df['year'] == year]
+    data = data[data['age'] == age]
+    data = data[data['generation'] == generation]
+    data['year'] = pd.to_datetime(data['year'], format='%Y')
 
-    chart = alt.Chart(df).mark_point().encode(
-        alt.X('gdp_per_capita ($)', title='GDP per Capita ($)'),
-        alt.Y('suicides_no', title='Total Number of Suicides')).interactive().configure(background = '#282b30')
+    chart = alt.Chart(data).mark_point().encode(
+        alt.X('year', title='Year'),
+        alt.Y('suicides_no', title='Total Number of Suicides')).interactive()
     return chart.to_html()
 
 # Poojitha's plot:
 # Suicide per capita data plot:
-def age_plot(country_dropdown, source):
+def age_plot(country_dropdown,source):
     data = source
     data_country_filter = data[data['country'] == country_dropdown]
-    #alt.renderers.set_embed_options(theme="dark")
     point = alt.Chart(data_country_filter).mark_point(filled = True).encode(
     x = 'year',
     y = 'Average_suicides_per_capita',
