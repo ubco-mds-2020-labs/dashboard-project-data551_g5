@@ -3,6 +3,8 @@
 # SUICIDE DATA INTERACTIVE DASHBOARD
 dashboard-project-data551_g5 created by GitHub Classroom
 
+Visit our App here: [Click](https://dashboardgroup5final.herokuapp.com)
+
 Contributors: Aditya Saluja, Yatin Behl, Sowmya Chenthi Kumar, Poojitha Gowthaman
 
 ## Descriptions:
