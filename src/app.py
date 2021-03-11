@@ -12,8 +12,8 @@ from data_mugging import clean_data
 import data_mugging
 import pandas as pd
 
-suicide_dataset = pd.read_csv('master.csv')
-cleaned_data = clean_data('master.csv')
+suicide_dataset = pd.read_csv('data/master.csv')
+cleaned_data = clean_data('data/master.csv')
 
 
 figure1 = global_suicide_stat = dash_plots.create_world_plot(cleaned_data,
