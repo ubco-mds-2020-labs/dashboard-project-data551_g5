@@ -51,7 +51,7 @@ server = app.server
 app.layout = dbc.Container([
     html.H1('SUICIDES : A GLOBAL IMPERATIVE',
             style={'text-align': 'center'}),
-    html.H5('Description : The Dashboard provides an in depth analysis of all factors related to the Number of Suicides in countries across the world'),
+    html.H5('Our dashboard provides an interactive exploration of suicide rates overview from 1985 to 2016. The data is visualized by age, country, gender and generation'),
     html.Br(),
     html.Div(
     [
@@ -89,7 +89,7 @@ app.layout = dbc.Container([
         ),
         html.Br(),
 
-        html.H3('Suicide Trends per Country'),
+        html.H3('Economic Factors'),
 
         dbc.Row(
             [
@@ -141,7 +141,7 @@ app.layout = dbc.Container([
         ),
 
 
-        html.H3('Other Factors'),
+        html.H3('Age Related Factors'),
 
         dbc.Row(
             [
@@ -168,7 +168,7 @@ app.layout = dbc.Container([
                         ])])]))], width=12)]),
         html.Br(),
 
-        html.H3('Mean Number of Suicides by Gender - All Countries'),
+        html.H3('Sex Based Factors'),
 
         dbc.Row(
             [
