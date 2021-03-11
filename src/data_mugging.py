@@ -11,6 +11,7 @@ def clean_data(file_path):
 
     list_countries = filtered_data['country'].unique().tolist()
     country_code_dict = {}
+    country_code=''
 
     for country in list_countries:
         try:

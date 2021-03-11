@@ -5,31 +5,31 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 #import dash_daq as daq
 
-import dash_plots
+import src.dash_plots 
 
 
-from data_mugging import clean_data
-import data_mugging
+from src.data_mugging import clean_data
+import src.data_mugging
 import pandas as pd
 
 suicide_dataset = pd.read_csv('data/master.csv')
 cleaned_data = clean_data('data/master.csv')
 
 
-figure1 = global_suicide_stat = dash_plots.create_world_plot(cleaned_data,
+figure1 = global_suicide_stat = src.dash_plots.create_world_plot(cleaned_data,
                                                    location='code',
                                                    color='suicides_no',
                                                    hover_name='country')
 
 # Suicides_per_capita plot:
-data_clean_suicide_per_capita = data_mugging.suicides_per_capita(
+data_clean_suicide_per_capita = src.data_mugging.suicides_per_capita(
     suicide_dataset)
 
 # Suicides by gender plot:
-data_suicides_by_gender = data_mugging.suicides_by_gender(suicide_dataset)
+data_suicides_by_gender = src.data_mugging.suicides_by_gender(suicide_dataset)
 
 # suicides by gdp
-data_suicides_by_gdp = data_mugging.suicide_by_gdp(suicide_dataset)
+data_suicides_by_gdp = src.data_mugging.suicide_by_gdp(suicide_dataset)
 
 # Create a list that is required for the slider:
 suicide_dataset['year'] = pd.to_datetime(suicide_dataset.year, format='%Y')
@@ -103,7 +103,7 @@ app.layout = dbc.Container([
                                 ]),
                         dbc.Col([
                             html.Iframe(
-                                srcDoc=dash_plots.country_plot(
+                                srcDoc=src.dash_plots.country_plot(
                                     source=data_suicides_by_gdp),
                                 id='scroll-plot',
                                 style={'border-width': '0',
@@ -149,7 +149,7 @@ app.layout = dbc.Container([
                     dbc.Row([
                         dbc.Col([
                             html.Iframe(
-                                srcDoc=dash_plots.age_plot(
+                                srcDoc=src.dash_plots.age_plot(
                                     country_dropdown='Canada', source=data_clean_suicide_per_capita, year=[1985, 2016]),
                                 id='mark_point',
                                 style={'border-width': '0',
@@ -158,7 +158,7 @@ app.layout = dbc.Container([
                         ]),
                         dbc.Col([
                             html.Iframe(
-                                srcDoc=dash_plots.plot_suicide_boxplot(
+                                srcDoc=src.dash_plots.plot_suicide_boxplot(
                                     country_dropdown='Canada', data=suicide_dataset),
                                 id='boxplot',
                                 style={'border-width': '0',
@@ -174,7 +174,7 @@ app.layout = dbc.Container([
             [
                 dbc.Col([dbc.Card(dbc.CardBody([html.P([
                     html.Iframe(
-                                srcDoc=dash_plots.suicides_gender(
+                                srcDoc=src.dash_plots.suicides_gender(
                                     data_suicides_by_gender),
                                 id='twinbar',
                                 style={'border-width': '0',
@@ -192,7 +192,7 @@ app.layout = dbc.Container([
     # Output('barplot', 'srcDoc'),
     [Input('country-dropdown', 'value')])
 def update_output(chosencountry):
-    return dash_plots.plot_suicide_boxplot(chosencountry, data=suicide_dataset)
+    return src.dash_plots.plot_suicide_boxplot(chosencountry, data=suicide_dataset)
 
 # Aditya's graph
 @ app.callback(
@@ -204,7 +204,7 @@ def update_output(chosencountry):
     Input('range-slider', 'value')
 )
 def update_output2(gender, country, age, year):
-    return dash_plots.plot_suicide_gdp(data=suicide_dataset, sex=gender, country=country, age=age, year=year)
+    return src.dash_plots.plot_suicide_gdp(data=suicide_dataset, sex=gender, country=country, age=age, year=year)
 
 # Poojitha's point graph:
 @ app.callback(
@@ -213,7 +213,7 @@ def update_output2(gender, country, age, year):
     Input('range-slider', 'value')
 )
 def update_output4(chosencountry, year):
-    return dash_plots.age_plot(country_dropdown=chosencountry, source=data_clean_suicide_per_capita, year=year)
+    return src.dash_plots.age_plot(country_dropdown=chosencountry, source=data_clean_suicide_per_capita, year=year)
 
 # Create a call back for the slider:
 #@ app.callback(
